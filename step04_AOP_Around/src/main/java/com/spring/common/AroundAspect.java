@@ -3,8 +3,11 @@ package com.spring.common;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.context.annotation.ComponentScans;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class AroundAspect {
 
 	@Around("within(com.spring.aop.*)")
