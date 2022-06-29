@@ -1,0 +1,14 @@
+step07_MVC_Session
+
+[학습]
+1. Cookie
+	- Client 저장
+	- 시간 설정(삭제를 위해서는 시간 0)
+	
+2. Session
+	- 서버의 메모리 저장
+	- HttpSession(삭제를 위해서는 invalidate)
+	
+3. 실습
+	- index.jsp[Create Cookie] -> controller[Acquire & Confirm Cookie]
+		-> cookieView.jsp[Acquire & Confirm Cookie]
