@@ -31,14 +31,14 @@
 		
 		<hr />
 		<c:choose>
-			<c:when test="${sessionScope.pwd ne null}">
+			<c:when test="${sessionScope.password eq null}">
+				<h3>로그인 하러 가기</h3> 
+				<a href="session/loginForm.do">로그인 하러 가기</a>	
+			</c:when>
+			<c:otherwise>
 				<h3>로그아웃 하러 가기</h3> 
 				<p>비밀번호 : ${sessionScope.password }</p>
 				<a href="session/logout.do">로그아웃 하러 가기</a>
-			</c:when>
-			<c:otherwise>
-				<h3>로그인 하러 가기</h3> 
-				<a href="session/loginForm.do">로그인 하러 가기</a>	
 			</c:otherwise>
 		</c:choose>
 		<br />
