@@ -4,14 +4,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>cookieView.jsp</title>
+		<title>index.jsp</title>
 	</head>
 	<body>
-		<h2>cookieView</h2>
-
-		${cookie.id.name }
-		${cookie.id.value }
-		${cookie.id }
-		
+		<form action="select.do" method="POST">
+			DeptNo : <input type="text" name="deptno" />
+			<input type="submit" value="입력"/>
+		</form>
 	</body>
 </html>

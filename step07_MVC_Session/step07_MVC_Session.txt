@@ -12,3 +12,7 @@ step07_MVC_Session
 3. 실습
 	- index.jsp[Create Cookie] -> controller[Acquire & Confirm Cookie]
 		-> cookieView.jsp[Acquire & Confirm Cookie]
+		
+	- index.jsp[Create Session] -> controller[Acquire & Confirm Session, Add new data]
+		-> sessionView1.jsp[Acquire & Confirm Session, Data utilization, session data purging(= delete) request]
+		-> controller[Delete session] -> sessionView.jsp
