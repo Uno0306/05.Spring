@@ -35,7 +35,8 @@ public class DeptController {
 				model.addAttribute("deptno", dept.getDeptno());
 				model.addAttribute("dname", dept.getDname());
 				model.addAttribute("loc", dept.getLoc());
-				return "view";
+//				return "../../view";
+				return "forward:/view.jsp";
 			}
 			
 		}
