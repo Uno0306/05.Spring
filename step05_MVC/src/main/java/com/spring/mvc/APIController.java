@@ -64,6 +64,7 @@ public class APIController {
 	}
 	
 	// 예외처리 확인을 위한 test 메소드
+	@SuppressWarnings("unused")
 	@GetMapping(value = "getData4.do")
 	public String GetFour() throws Exception {
 		if (true) {
