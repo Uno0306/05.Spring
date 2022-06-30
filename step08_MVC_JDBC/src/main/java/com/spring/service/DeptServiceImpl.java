@@ -1,5 +1,9 @@
 package com.spring.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +17,52 @@ public class DeptServiceImpl implements DeptService{
 	DeptMapper deptMapper;
 	
 	@Override
+	public String getDeptNameByDeptno(int deptno) {
+		return deptMapper.getDeptNameByDeptno(deptno);
+	};
+	
+	@Override
 	public Dept getDeptByDeptno(int deptno) {
 		return deptMapper.getDeptByDeptno(deptno);
 	}
+	
+	@Override
+	public HashMap<String, Object> getDeptMap(int deptno){
+		return deptMapper.getDeptMap(deptno);
+	};
+	
+	@Override
+	public List<Dept> getAllDepts(){
+		return deptMapper.getAllDepts();
+	};
+	
+	@Override
+	public List<HashMap<String, Object>> getAllDeptsMap(){
+		return deptMapper.getAllDeptsMap();
+	};
+	
+	
+	@Override
+	public void insertDept(Dept dept) {
+		deptMapper.insertDept(dept);
+	};
+	
+	
+//	@Override
+//	public HashMap<String, Object> updateDept(int deptno, Map<String, String> map){
+//		return deptMapper.updateDept(deptno, map);
+//	};
+	
+
+	@Override
+	public void updateDeptByDeptnoAndDname(Map<String, Object> data) {
+		deptMapper.updateDeptByDeptnoAndDname(data);
+	};
+	
+	@Override
+	public void delteDept(String loc) {
+		deptMapper.delteDept(loc);
+	};
+	
 	
 }

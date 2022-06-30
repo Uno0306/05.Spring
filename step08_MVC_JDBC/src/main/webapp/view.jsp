@@ -8,19 +8,7 @@
 	</head>
 	<body>
 		<hr/>
-
-	
-	<script type="text/javascript">
-	
-		let url="";
-		fetch(url, {
-			method:"GET"
-		}).then(function(data){
-			return data.json();
-		})
-	
-	</script>
-	
+		
 		<p>부서 정보 : ${requestScope.dept }</p><br/>
 		
 		<p>부서 번호 : ${deptno }</p>

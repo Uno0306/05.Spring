@@ -7,7 +7,7 @@
 		<title>index.jsp</title>
 	</head>
 	<body>
-		<form action="select.do" method="POST">
+		<form action="select.do" method="GET">
 			DeptNo : <input type="text" name="deptno" />
 			<input type="submit" value="입력"/>
 		</form>
