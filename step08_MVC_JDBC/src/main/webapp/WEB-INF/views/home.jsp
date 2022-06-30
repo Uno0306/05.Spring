@@ -1,80 +1,131 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ page
-session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %> <%@ page session="false" %>
 
 <html>
   <head>
-    <title>Home</title>
+    <meta charset="UTF-8" />
+    <title>Department</title>
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <h1>Hello world!!!!!!!!!!!</h1>
+    <h1>부서 관리</h1>
+
+    <h2>부서 추가(JSON)</h2>
+    <form action="/jdbc" method="post" id="formJSON">
+      <input
+        type="number"
+        id="deptno"
+        name="deptno"
+        placeholder="부서 번호를 입력해주세요"
+      />
+      <input
+        type="text"
+        id="dname"
+        name="dname"
+        placeholder="부서 명을 입력해주세요"
+      />
+      <input
+        type="text"
+        id="loc"
+        name="loc"
+        placeholder="부서 위치를 입력해주세요"
+      />
+      <input type="submit" onclick="insertJSON()" value="추가" />
+    </form>
+
+    <br />
+    <hr />
+    <h2>부서 추가(Form)</h2>
+    <form action="/jdbc" method="post" id="formForm">
+      <input
+        type="number"
+        id="deptno2"
+        name="deptno"
+        placeholder="부서 번호를 입력해주세요"
+      />
+      <input
+        type="text"
+        id="dname2"
+        name="dname"
+        placeholder="부서 명을 입력해주세요"
+      />
+      <input
+        type="text"
+        id="loc2"
+        name="loc"
+        placeholder="부서 위치를 입력해주세요"
+      />
+      <input type="button" onclick="insertForm()" value="추가" />
+    </form>
+
+    <br />
+    <hr />
+    <input type="button" onclick="selectAll()" value="모두 검색" />
+    <div id="dom"></div>
 
     <script>
-      /*
-           // (JSON) INSERT "/api/deptjson" => deptno : 90, dname : FRONTEND, loc : JEJU
-              // INSERT INTO dept(deptno, dname, loc)
-              // VALUSE(90, "FRONTEND", "LOC")
-         */
-      //   const url = 'http://localhost:8080/jdbc/api/deptjson';
-      //   const headers = {
-      //     'Content-Type': 'application/json',
-      //   };
-      //   const inputDept = {
-      //     deptno: 90,
-      //     dname: 'FRONTEND',
-      //     loc: 'LOC',
-      //   };
+      const deptno = document.getElementById('deptno');
+      const dname = document.getElementById('dname');
+      const loc = document.getElementById('loc');
+      const deptno2 = document.getElementById('deptno2');
+      const dname2 = document.getElementById('dname2');
+      const loc2 = document.getElementById('loc2');
 
-      /* // (FormEncoded) INSERT "/api/deptjson" => deptno : 100, dname : TEST, loc : TEST
-              // INSERT INTO dept(deptno, dname, loc)
-              // VALUSE(100, "TEST", "TEST")
-            */
-      //   const url = 'http://localhost:8080/jdbc/api/deptform';
-      //   const inputDept = 'deptno=100&dname=TEST&loc=TEST';
-      //   const headers = {
-      //     'Content-Type': 'application/x-www-form-urlencoded',
-      //   };
+      /* json 사용하여 INSERT */
+      function insertJSON() {
+        const url = 'http://localhost:8080/jdbc/api/deptjson';
+        const inputDept = {
+          deptno: deptno.value,
+          dname: dname.value,
+          loc: loc.value,
+        };
+        const headers = {
+          'Content-Type': 'application/json',
+        };
+        insertAxios(url, inputDept, headers);
+      }
 
-      /* select */
-      const url = 'http://localhost:8080/jdbc/api/depts';
+      /* form 사용하여 INSERT */
+      function insertForm() {
+        const url = 'http://localhost:8080/jdbc/api/deptform';
+        const inputDept =
+          'deptno=' +
+          deptno2.value +
+          '&dname=' +
+          dname2.value +
+          '&loc=' +
+          loc2.value;
+        const headers = {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        };
+        insertAxios(url, inputDept, headers);
+      }
 
-      /**/
+      /* axios 실행 */
+      function insertAxios(url, inputDept, headers) {
+        axios.post(url, inputDept, { headers }).catch((error) => {
+          console.log(error);
+        });
+      }
 
-      //   axios.get(url).then((response) => {
-      //     console.log(response);
-      //   });
-
-      const dom = document.getElementById('#dom');
+      /* SELECT all */
       function selectAll() {
-        // var arr = new Array();
-        var result = ``;
+        var dom = document.getElementById('dom');
+        const url = 'http://localhost:8080/jdbc/api/depts';
         axios
           .get(url)
           .then((response) => response.data)
           .then((data) => {
             for (var i = 0; i < data.length; i++) {
-              //   arr.push(data[i]);
-              console.log(data[i]);
               var arr = data[i];
-              //   document.write(data[i]);
               for (da in arr) {
-                document.write(da + ': ' + arr[da] + ' ');
+                dom.innerHTML += da + ': ' + arr[da] + ' ';
               }
-              document.write('<br/>');
-              //   result += `<div>${data[i]}<div><br/>`;
-              //   console.log(result);
-              //   dom.innerHTML += result;
-              //   console.log(dom);
+              dom.innerHTML += '<br/>';
             }
-            // $('body').html(result);
-            // return dom;
           });
       }
     </script>
-
-    <P> The time on the server is ${serverTime}. </P>
-
-    <input type="button" onclick="selectAll()" value="searchAll" />
-    <div id="dom"></div>
   </body>
 </html>
