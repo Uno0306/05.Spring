@@ -2,7 +2,6 @@ package com.spring.mapper;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.spring.dto.Dept;
 
@@ -32,7 +31,7 @@ public interface DeptMapper {
 	
 	// update : where deptno = 50 and dname = "PROGRAMMING" -> loc : MOON
 //	public void updateDeptByDeptnoAndDname(int deptno, String dname);
-	public void updateDeptByDeptnoAndDname(Map<String, Object> data);
+	public void updateDeptByDeptno(Dept data);
 	
-	public void delteDept(String loc);
+	public void delteDeptByDeptno(String deptno);;
 }

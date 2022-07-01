@@ -2,7 +2,6 @@ package com.spring.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,13 +54,13 @@ public class DeptServiceImpl implements DeptService{
 	
 
 	@Override
-	public void updateDeptByDeptnoAndDname(Map<String, Object> data) {
-		deptMapper.updateDeptByDeptnoAndDname(data);
+	public void updateDeptByDeptno(Dept data) {
+		deptMapper.updateDeptByDeptno(data);
 	};
 	
 	@Override
-	public void delteDept(String loc) {
-		deptMapper.delteDept(loc);
+	public void delteDeptByDeptno(String deptno) {
+		deptMapper.delteDeptByDeptno(deptno);
 	};
 	
 	

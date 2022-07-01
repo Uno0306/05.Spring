@@ -2,7 +2,6 @@ package com.spring.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.spring.dto.Dept;
 
@@ -23,7 +22,7 @@ public interface DeptService {
 //	public HashMap<String, Object> updateDept(int deptno, Map<String, String> map);
 	
 
-	public void updateDeptByDeptnoAndDname(Map<String, Object> data);
+	public void updateDeptByDeptno(Dept data);
 	
-	public void delteDept(String loc);
+	public void delteDeptByDeptno(String deptno);
 }
