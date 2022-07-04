@@ -20,7 +20,7 @@ public class JPAFinalTest {
 //			JPA02CRUD.insert(em, 2, "Ali");
 //			JPA02CRUD.insert(em, 30, "Paster");
 //			JPA02CRUD.insert(em, 60, "Endy");
-			JPA02CRUD.insert(em, 25, "Wendy");
+//			JPA02CRUD.insert(em, 25, "Wendy");
 			
 //			JPA02CRUD.selectById(em, 13245646L);
 			
@@ -30,7 +30,7 @@ public class JPAFinalTest {
 //			JPA02CRUD.delete(em, 13245646L);
 			
 //			JPA02CRUD.selectAll(em);
-//			JPA02CRUD.selectAllName(em);
+			JPA02CRUD.selectAllName(em);
 			
 			tx.commit();
 		} catch (Exception e) {
