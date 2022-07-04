@@ -1,27 +1,27 @@
-package entity;
+package step01.entity;
+
+import lombok.Data;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Data;
-
 @Data
-@Entity(name = "user")
-public class User {
+//@Entity
+public class Member {
 	
-	// id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	// length = 20
-	@Column(length = 20)
+	@Column(name="member_name", length = 20)
 	private String name;
 	
-	// length = 3
-	@Column(length = 3)
 	private Integer age;
+
+	@Column(name="team_id")
+	private Long teamId;
+	
 }

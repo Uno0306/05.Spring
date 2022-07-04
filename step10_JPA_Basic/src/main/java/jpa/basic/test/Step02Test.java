@@ -27,8 +27,8 @@ public class Step02Test {
 			tx.rollback();
 		} finally {
 			em.close();
+			emf.close();
 		}
-		emf.close();
 	}
 
 	private static void logic(EntityManager em) {

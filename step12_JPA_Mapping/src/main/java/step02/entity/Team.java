@@ -1,7 +1,7 @@
-package entity;
+package step02.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
+//import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,19 +9,14 @@ import javax.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity(name = "user")
-public class User {
+//@Entity
+public class Team {
 	
-	// id
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	// length = 20
 	@Column(length = 20)
 	private String name;
 	
-	// length = 3
-	@Column(length = 3)
-	private Integer age;
 }

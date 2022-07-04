@@ -11,9 +11,8 @@ import entity.User;
 
 public class JPA02CRUD {
 	
-	public static void insert(EntityManager em, Long id, int age, String name) {
+	public static void insert(EntityManager em, int age, String name) {
 		User user = new User();
-		user.setId(id);
 		user.setAge(age);
 		user.setName(name);
 		System.out.println(user);

@@ -16,10 +16,11 @@ public class JPAFinalTest {
 		tx.begin();
 		
 		try {
-//			JPA02CRUD.insert(em, 13245646L, 24, "Jackson");
-//			JPA02CRUD.insert(em, 13245154L, 2, "Ali");
-//			JPA02CRUD.insert(em, 13213246L, 30, "Paster");
-//			JPA02CRUD.insert(em, 46546546L, 60, "Endy");
+//			JPA02CRUD.insert(em, 24, "Jackson");
+//			JPA02CRUD.insert(em, 2, "Ali");
+//			JPA02CRUD.insert(em, 30, "Paster");
+//			JPA02CRUD.insert(em, 60, "Endy");
+			JPA02CRUD.insert(em, 25, "Wendy");
 			
 //			JPA02CRUD.selectById(em, 13245646L);
 			
