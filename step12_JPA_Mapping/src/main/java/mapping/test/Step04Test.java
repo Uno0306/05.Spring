@@ -42,8 +42,8 @@ public class Step04Test {
 		Member findMember = em.find(Member.class, member1.getId());
 		System.out.println("Information of member : "+findMember);
 		
-//		Team findTeam = findMember.getTeam();
-//		System.out.println("Information of team : " + findTeam);
+		Team findTeam = findMember.getTeam();
+		System.out.println("Information of team : " + findTeam);
 	}
 	
 	public static void main(String[] args) {

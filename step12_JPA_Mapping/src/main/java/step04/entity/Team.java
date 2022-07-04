@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity
+@ToString(exclude = {"members"})
 public class Team {
 	
 	@Id
@@ -26,7 +28,7 @@ public class Team {
 	@OneToMany(mappedBy = "team")
 	List<Member> members = new ArrayList<Member>();
 	
-	public String toString() {
-		return "Team";
-	}
+//	public String toString() {
+//		return id + " " + name;
+//	}
 }
