@@ -5,7 +5,7 @@
     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
 	version="2.2">
 
-	<persistence-unit name="step11_JPA_Basic">
+	<persistence-unit name="step11_JPA_Practice">
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
@@ -25,7 +25,7 @@
 			<property name="hibernate.id.new_generator_mappings"
 				value="true" />
 				
-			<property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.hbm2ddl.auto" value="none"/>
 
 		</properties>
 	</persistence-unit>
