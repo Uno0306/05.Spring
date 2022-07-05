@@ -1,4 +1,4 @@
-package step04.entity;
+package step05.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import lombok.Data;
 import lombok.ToString;
@@ -16,19 +16,17 @@ import lombok.ToString;
 @Data
 //@Entity
 @ToString(exclude = {"members"})
-public class Team {
+public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "product_id")
 	private Long id;
 	
-	@Column(length = 20)
 	private String name;
 	
-	@OneToMany(mappedBy = "team")
-	List<Member> members = new ArrayList<Member>();
+	@ManyToMany(mappedBy = "products")
+	private List<Member> members = new ArrayList<Member>();
 	
-//	public String toString() {
-//		return id + " " + name;
-//	}
+	
 }

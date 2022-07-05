@@ -1,10 +1,11 @@
-package step04.entity;
+package step06.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-//import javax.persistence.Entity;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,21 +15,18 @@ import lombok.Data;
 import lombok.ToString;
 
 @Data
-//@Entity
-@ToString(exclude = {"members"})
-public class Team {
+@Entity
+@ToString(exclude = {"order"})
+public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "product_id")
 	private Long id;
 	
-	@Column(length = 20)
 	private String name;
 	
-	@OneToMany(mappedBy = "team")
-	List<Member> members = new ArrayList<Member>();
+	@OneToMany(mappedBy = "product", cascade = {CascadeType.REMOVE})
+	private List<Order> order = new ArrayList<Order>();
 	
-//	public String toString() {
-//		return id + " " + name;
-//	}
 }
