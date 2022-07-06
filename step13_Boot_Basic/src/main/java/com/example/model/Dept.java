@@ -1,26 +1,26 @@
 package com.example.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
+@DynamicInsert
+@DynamicUpdate
 @Entity(name = "dept")
 @AllArgsConstructor()
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Builder(builderMethodName = "DeptBuilder")
-//@ToString(exclude = {"emps"})
 public class Dept {
 	
 	@Id
@@ -41,7 +41,16 @@ public class Dept {
 				.dname(dept.getDname())
 				.loc(dept.getLoc());
 	}
-
+	
+//	public static Dept deptUpdate(Dept dept) {
+//		Dept returnDept = new Dept();
+//		if (dept.getDeptno() == null ) {
+//			
+//		}
+//			
+//		
+//		return returnDept;
+//	}
 	
 	
 }

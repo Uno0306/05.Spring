@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity(name="emp")
@@ -23,12 +24,13 @@ public class Emp {
 	
 	@Column(length = 9)
 	private String job;
-	private int mgr;
+	private Integer mgr;
 	private LocalDate hiredate;
-	private float sal;
-	private float comm;
+	private Float sal;
+	private Float comm;
 	
-//	@ManyToOne(fetch= FetchType.LAZY)
-//	@JoinColumn(name="deptno")
-//	private Dept dept;
+	@ManyToOne()
+	@JoinColumn(name="deptno")
+	private Dept dept;
+	
 }

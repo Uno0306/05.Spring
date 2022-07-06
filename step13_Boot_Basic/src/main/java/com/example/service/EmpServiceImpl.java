@@ -33,7 +33,7 @@ public class EmpServiceImpl implements EmpService{
 	@Override
 	public void updateEmp(Emp emp) {
 		System.out.println("update : " + emp);
-		empRepositiry.save(emp);
+		empRepositiry.saveAndFlush(emp);
 	};
 	
 	@Override

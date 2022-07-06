@@ -14,7 +14,7 @@ public interface DeptRepository extends JpaRepository<Dept, Long> {
 	
 	public Dept findDeptByDeptno(Long deptno);
 	
-	public Dept save(Dept dept);
+	public Dept saveAndFlush(Dept dept);
 	
 	public void deleteDeptByDeptno(Long deptno);
 	

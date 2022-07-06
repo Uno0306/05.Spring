@@ -26,20 +26,17 @@ public class DeptServiceImpl implements DeptService{
 	
 	@Override
 	public void insertDept(Dept dept) {
-		System.out.println("insert : " + dept);
 		deptRepositiry.save(dept);
 	}
 	
 	@Override
 	public void updateDept(Dept dept) {
-		System.out.println("update : " + dept);
 		Dept deptBulider = Dept.deptBuilder(dept).build();
-		deptRepositiry.save(deptBulider);
+		deptRepositiry.saveAndFlush(deptBulider);
 	};
 	
 	@Override
 	public void deleteDeptByDeptno(Long deptno) {
-		System.out.println("delete : " + deptno);
 		deptRepositiry.deleteDeptByDeptno(deptno);
 	};
 }

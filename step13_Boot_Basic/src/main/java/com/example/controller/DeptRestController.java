@@ -32,18 +32,18 @@ public class DeptRestController {
 	public List<Dept> getDepts(){
 		return deptService.getDeptAll();
 	}
-
+	
 	@GetMapping(value = "/dept/{deptno}")
 	public Dept getDeptByDeptno(@PathVariable Long deptno) {
 		return deptService.getDeptByDeptno(deptno);
 	}
 
-	@PostMapping(value = "/dept", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertDept(@RequestBody Dept param) {
+	@PostMapping(value = "/dept/{deptno}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void insertDept(@PathVariable Long deptno, @RequestBody Dept param) {
 		Dept deptCheck = new Dept();
-		deptCheck = getDeptByDeptno(param.getDeptno());
+		deptCheck = getDeptByDeptno(deptno);
 		if(deptCheck == null) {
-			Dept dept = new Dept(param.getDeptno(), param.getDname(), param.getLoc());
+			Dept dept = new Dept(deptno, param.getDname(), param.getLoc());
 			deptService.insertDept(dept);
 		}else {
 			System.out.println("부서번호가 존재랍니다.");
@@ -53,24 +53,31 @@ public class DeptRestController {
 	@PutMapping(value = "/dept/{deptno}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDeptByDeptno(@PathVariable Long deptno, @RequestBody Dept param) {
 		if(deptno == null ) {
-			System.out.println("부서번호가 존재하지 않습니다.");
+			System.out.println("부서번호를 입력해주세요.");
 		}else {
-			System.out.println("check");
-			Dept dept =  new Dept(deptno, "감자", param.getLoc());
-			
-			deptService.updateDept(dept);
+			Dept originDept = getDeptByDeptno(deptno);
+			if(originDept == null) {
+				System.out.println("부서번호가 존재하지 않습니다.");
+			}else {
+				Dept dept =  new Dept(
+						param.getDeptno() == null? originDept.getDeptno() : param.getDeptno(), 
+								param.getDname() == null? originDept.getDname() : param.getDname(), 
+										param.getLoc()== null? originDept.getLoc() : param.getLoc()) ;
+				
+				deptService.updateDept(dept);
+			}
 		}
 	}
 
-//	@DeleteMapping(value="/dept/{deptno}")
-//	@Transactional
-//	public void deleteByDeptno(@PathVariable Long deptno) {
-//		Dept dept = new Dept();
-//		dept = getDeptByDeptno(deptno);
-//		if(dept == null) {
-//			System.out.println("부서번호가 존재하지 않습니다.");
-//		}else {
-//			deptService.deleteDeptByDeptno(deptno);
-//		}
-//	}
+	@DeleteMapping(value="/dept/{deptno}")
+	@Transactional
+	public void deleteByDeptno(@PathVariable Long deptno) {
+		Dept dept = new Dept();
+		dept = getDeptByDeptno(deptno);
+		if(dept == null) {
+			System.out.println("부서번호가 존재하지 않습니다.");
+		}else {
+			deptService.deleteDeptByDeptno(deptno);
+		}
+	}
 }
