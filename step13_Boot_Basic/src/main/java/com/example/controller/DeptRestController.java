@@ -11,31 +11,41 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.model.Dept;
 import com.example.service.DeptServiceImpl;
 
 @RestController
+@RequestMapping("/api")
+//@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
 public class DeptRestController {
 
 	@Autowired
 	DeptServiceImpl deptService;
 
-	@GetMapping(value="/depts")
+	@GetMapping(value="/dept/depts")
 	public List<Dept> getDepts(){
 		return deptService.getDeptAll();
 	}
 	
 	@GetMapping(value = "/dept/{deptno}")
 	public Dept getDeptByDeptno(@PathVariable Long deptno) {
-		return deptService.getDeptByDeptno(deptno);
+		Dept dept = deptService.getDeptByDeptno(deptno);
+		System.out.println(dept);
+		if(dept != null) {
+			return deptService.getDeptByDeptno(deptno);
+		}else {
+			return null;
+		}
 	}
 
 	@PostMapping(value = "/dept/{deptno}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -59,11 +69,7 @@ public class DeptRestController {
 			if(originDept == null) {
 				System.out.println("부서번호가 존재하지 않습니다.");
 			}else {
-				Dept dept =  new Dept(
-						param.getDeptno() == null? originDept.getDeptno() : param.getDeptno(), 
-								param.getDname() == null? originDept.getDname() : param.getDname(), 
-										param.getLoc()== null? originDept.getLoc() : param.getLoc()) ;
-				
+				Dept dept = Dept.deptCheck(originDept, param);
 				deptService.updateDept(dept);
 			}
 		}

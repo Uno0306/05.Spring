@@ -34,7 +34,7 @@ public class Dept {
 	
 //	@OneToMany(mappedBy = "dept")
 //	List<Emp> emps = new ArrayList<Emp>();
-//	
+
 	public static DeptBuilder deptBuilder(Dept dept) {
 		return DeptBuilder()
 				.deptno(dept.getDeptno())
@@ -42,15 +42,18 @@ public class Dept {
 				.loc(dept.getLoc());
 	}
 	
-//	public static Dept deptUpdate(Dept dept) {
-//		Dept returnDept = new Dept();
-//		if (dept.getDeptno() == null ) {
-//			
-//		}
-//			
-//		
-//		return returnDept;
-//	}
+	public static Dept deptCheck(Dept originDept, Dept requestDept) {
+		if(requestDept.getDeptno() == null) {
+			requestDept.setDeptno(originDept.getDeptno());
+		}
+		if(requestDept.getDname() == null) {
+			requestDept.setDname(originDept.getDname());
+		}
+		if(requestDept.getLoc() == null) {
+			requestDept.setLoc(originDept.getLoc());
+		}
+		return requestDept;
+	}
 	
 	
 }
