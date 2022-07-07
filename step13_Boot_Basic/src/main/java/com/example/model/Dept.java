@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.example.dto.DeptDTO;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,26 +24,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Builder(builderMethodName = "DeptBuilder")
 public class Dept {
-	
+
 	@Id
 	private Long deptno;
-	
+
 	@Column(length = 14)
 	private String dname;
 
 	@Column(length = 13)
 	private String loc;
-	
-//	@OneToMany(mappedBy = "dept")
-//	List<Emp> emps = new ArrayList<Emp>();
 
-	public static DeptBuilder deptBuilder(Dept dept) {
-		return DeptBuilder()
-				.deptno(dept.getDeptno())
-				.dname(dept.getDname())
-				.loc(dept.getLoc());
+	//	@OneToMany(mappedBy = "dept")
+	//	List<Emp> emps = new ArrayList<Emp>();
+
+	public DeptDTO toDTO(Dept deptEntity) {
+		DeptDTO deptDTO = DeptDTO.builder()
+				.deptno(deptEntity.getDeptno())
+				.dname(deptEntity.getDname())
+				.loc(deptEntity.getLoc())
+				.build();
+		return deptDTO;
 	}
-	
+
+
 	public static Dept deptCheck(Dept originDept, Dept requestDept) {
 		if(requestDept.getDeptno() == null) {
 			requestDept.setDeptno(originDept.getDeptno());
@@ -54,6 +59,12 @@ public class Dept {
 		}
 		return requestDept;
 	}
-	
-	
+
+	public static DeptBuilder deptBuilder(Dept dept) {
+		return DeptBuilder()
+				.deptno(dept.getDeptno())
+				.dname(dept.getDname())
+				.loc(dept.getLoc());
+	}
+
 }

@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -139,8 +135,9 @@ public class DiaryController {
 		System.out.println("=====PageRequestDTO 객체값 출력(page번 페이지에 있는 내용만)=====");
 		// ??
 		pageResultDTO.getDtoList().forEach(diaryDto -> System.out.println(diaryDto));
-
+		
 		System.out.println("END=====PageRequestDTO=====");
+		System.out.println(pageResultDTO.getPageList());
 		System.out.println("END========pageRequestDTO===========");
 	}
 

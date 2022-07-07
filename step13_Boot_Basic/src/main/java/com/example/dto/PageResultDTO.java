@@ -1,4 +1,4 @@
-package com.spring.dto;
+package com.example.dto;
 
 import java.util.List;
 import java.util.function.Function;
@@ -52,10 +52,10 @@ public class PageResultDTO<DTO, EN> {
 		// 첫번째 page = 1 -> 10
 		// 페이지 = 11 -> 
 		start = endPage - 9;	// 10개씩이라 9를 빼주면 첫페이지
-		prev = start > 1;
+		prev = page > 1;
 		
 		end = totalPage > endPage? endPage: totalPage;
-		next = totalPage > endPage;
+		next = totalPage < endPage;
 		
 		pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
 	}

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 //import static org.junit.Assert.*;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dto.DeptDTO;
+import com.example.dto.PageRequestDTO;
+import com.example.dto.PageResultDTO;
 import com.example.model.Dept;
 import com.example.service.DeptServiceImpl;
 
@@ -37,10 +43,18 @@ public class DeptRestController {
 		return deptService.getDeptAll();
 	}
 	
+	@GetMapping(value="/dept/deptspaging")
+	public PageResultDTO<DeptDTO, Dept> getDiary(PageRequestDTO pageRequestDTO) {
+		PageResultDTO<DeptDTO, Dept> pageResultDTO = deptService.getList(pageRequestDTO);
+		List<DeptDTO> deptList = new ArrayList<DeptDTO>();
+		// ??
+		pageResultDTO.getDtoList().forEach(deptDto -> deptList.add(deptDto));
+		return pageResultDTO;
+	}
+	
 	@GetMapping(value = "/dept/{deptno}")
 	public Dept getDeptByDeptno(@PathVariable Long deptno) {
 		Dept dept = deptService.getDeptByDeptno(deptno);
-		System.out.println(dept);
 		if(dept != null) {
 			return deptService.getDeptByDeptno(deptno);
 		}else {
