@@ -10,6 +10,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.spring.dto.DiaryDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +45,16 @@ public class Diary implements Persistable<Long> {
 	@Override	// 영속성이 있는지 판단하는 메소드
 	public boolean isNew() {
 		return writtenTime == null;
+	}
+
+	public DiaryDTO toDTO(Diary diaryEntity) {
+		DiaryDTO diaryDTO = DiaryDTO.builder()
+									.no(diaryEntity.getNo())
+									.content(diaryEntity.getTitle())
+									.title(diaryEntity.getTitle())
+									.writtenTime(diaryEntity.getWrittenTime())
+									.build();
+		return diaryDTO;
 	}
 	
 }

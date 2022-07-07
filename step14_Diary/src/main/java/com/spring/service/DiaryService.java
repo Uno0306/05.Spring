@@ -3,8 +3,12 @@ package com.spring.service;
 import java.util.List;
 
 import com.spring.dto.DiaryDTO;
+import com.spring.dto.PageRequestDTO;
+import com.spring.dto.PageResultDTO;
+import com.spring.entity.Diary;
 
 public interface DiaryService {
 	public void insertDiary(DiaryDTO diaryDTO);
 	public void insertDiaryBatch(List<DiaryDTO> diaryDTOList);
+	public PageResultDTO<DiaryDTO, Diary> getList(PageRequestDTO pageRequestDTO);
 }
