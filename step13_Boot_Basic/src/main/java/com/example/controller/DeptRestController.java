@@ -3,6 +3,7 @@ package com.example.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 //import static org.junit.Assert.*;
 //import org.junit.test;
@@ -70,8 +71,9 @@ public class DeptRestController {
 			Dept dept = new Dept(deptno, param.getDname(), param.getLoc());
 			deptService.insertDept(dept);
 		}else {
-			System.out.println("부서번호가 존재랍니다.");
+			System.out.println("부서번호가 존재합니다.");
 		}
+	
 	}
 	
 	@PutMapping(value = "/dept/{deptno}", consumes = MediaType.APPLICATION_JSON_VALUE)

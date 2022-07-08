@@ -37,7 +37,6 @@ public class DiaryController {
 
 	@PostMapping("/diary-batch")
 	public void insertDiaryBatch() {
-
 		List<DiaryDTO> diaryDTOList = new ArrayList<DiaryDTO>();
 		IntStream.rangeClosed(1, 200).forEach(i -> {
 			diaryDTOList.add(DiaryDTO.builder()

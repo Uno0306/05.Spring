@@ -55,7 +55,7 @@ public class PageResultDTO<DTO, EN> {
 		prev = page > 1;
 		
 		end = totalPage > endPage? endPage: totalPage;
-		next = totalPage < endPage;
+		next = totalPage > page;
 		
 		pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
 	}
