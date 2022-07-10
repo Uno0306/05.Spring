@@ -5,7 +5,7 @@ import java.util.List;
 import com.example.dto.DeptDTO;
 import com.example.dto.PageRequestDTO;
 import com.example.dto.PageResultDTO;
-import com.example.model.Dept;
+import com.example.entity.Dept;
 
 public interface DeptService {
 	public List<Dept> getDeptAll();

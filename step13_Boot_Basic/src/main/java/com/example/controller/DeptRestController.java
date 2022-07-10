@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.dto.DeptDTO;
 import com.example.dto.PageRequestDTO;
 import com.example.dto.PageResultDTO;
-import com.example.model.Dept;
+import com.example.entity.Dept;
 import com.example.service.DeptServiceImpl;
 
 import lombok.RequiredArgsConstructor;

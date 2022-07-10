@@ -12,10 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.model.Dept;
 import com.example.dto.DeptDTO;
 import com.example.dto.PageRequestDTO;
 import com.example.dto.PageResultDTO;
+import com.example.entity.Dept;
 import com.example.repository.DeptRepository;
 
 import lombok.RequiredArgsConstructor;

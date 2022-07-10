@@ -1,12 +1,11 @@
 package com.example.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.dto.EmpDTO;
 import com.example.dto.PageRequestDTO;
 import com.example.dto.PageResultDTO;
-import com.example.model.Emp;
+import com.example.entity.Emp;
 import com.example.service.EmpServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +34,6 @@ public class EmpRestController {
 //	@Autowired
 	private final EmpServiceImpl empService;
 
-	@Transactional
 	@GetMapping(value="/emp/emps")
 	public PageResultDTO<EmpDTO, Emp> getEmp(PageRequestDTO pageRequestDTO) {
 		PageResultDTO<EmpDTO, Emp> pageResultDTO = empService.getList(pageRequestDTO);
@@ -44,19 +42,17 @@ public class EmpRestController {
 		return pageResultDTO;
 	}
 	
-	@Transactional
 	@GetMapping(value = "/emp/{empno}")
 	public Emp getEmpByEmpno(@PathVariable Long empno) {
 		return empService.getEmpByEmpno(empno);
 	}
 
-	@Transactional
 	@PostMapping(value = "/emp/{empno}", consumes =MediaType.APPLICATION_JSON_VALUE )
-	public void insertEmp(@RequestBody EmpDTO empDTO) {
+	public void insertEmp(@PathVariable Long empno, @RequestBody EmpDTO empDTO) {
+		empDTO.setEmpno(empno);
 		empService.insertEmp(empDTO);
 	}
 	
-	@Transactional
 	@PutMapping(value = "/emp/{empno}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateEmpByEmpno(@PathVariable Long empno, @RequestBody EmpDTO empDTO) {
 		if(empno == null ) {
@@ -73,7 +69,6 @@ public class EmpRestController {
 	}
 
 	
-	@Transactional
 	@DeleteMapping(value="/emp/{empno}")
 	public void deleteByEmpno(@PathVariable Long empno) {
 		Emp emp = new Emp();

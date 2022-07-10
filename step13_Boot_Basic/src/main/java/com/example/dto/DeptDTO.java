@@ -3,7 +3,7 @@ package com.example.dto;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
-import com.example.model.Dept;
+import com.example.entity.Dept;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

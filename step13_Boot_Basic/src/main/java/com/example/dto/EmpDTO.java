@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.example.model.Dept;
-import com.example.model.Emp;
+import com.example.entity.Dept;
+import com.example.entity.Emp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
