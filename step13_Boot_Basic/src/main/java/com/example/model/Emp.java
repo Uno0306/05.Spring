@@ -4,15 +4,31 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Data
+import com.example.dto.EmpDTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 @Entity(name="emp")
-public class Emp {
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@EntityListeners(AuditingEntityListener.class)
+public class Emp implements Persistable<Long>{
 	
 	@Id
 	private Long  empno;
@@ -23,7 +39,10 @@ public class Emp {
 	@Column(length = 9)
 	private String job;
 	private Integer mgr;
+	
+	@CreatedDate
 	private LocalDate hiredate;
+	
 	private Float sal;
 	private Float comm;
 	
@@ -31,33 +50,29 @@ public class Emp {
 	@JoinColumn(name="deptno")
 	private Dept dept;
 	
-	public static Emp empCheck(Emp originEmp, Emp requestEmp) {
-		LocalDate now = LocalDate.now();  
+	@Override
+	public Long getId() {
+		return empno;
+	}
+	
+	@Override	// 영속성이 있는지 판단하는 메소드
+	public boolean isNew() {
+		return hiredate == null;
+	}
+	
+	public EmpDTO toDTO(Emp empEntity) {
+		EmpDTO empDTO= EmpDTO.builder()
+							.empno(empEntity.getEmpno())
+							.ename(empEntity.getEname())
+							.job(empEntity.getJob())
+							.mgr(empEntity.getMgr())
+							.hiredate(empEntity.getHiredate())
+							.sal(empEntity.getSal())
+							.comm(empEntity.getComm())
+							.dept(empEntity.getDept())
+							.build();
 		
-		if(requestEmp.getEmpno() == null) {
-			requestEmp.setEmpno(originEmp.getEmpno());
-		}
-		if(requestEmp.getEname() == null) {
-			requestEmp.setEname(originEmp.getEname());
-		}
-		if(requestEmp.getJob() == null) {
-			requestEmp.setJob(originEmp.getJob());
-		}
-		if(requestEmp.getMgr() == null) {
-			requestEmp.setMgr(originEmp.getMgr());
-		}
-		requestEmp.setHiredate(now);
-		if(requestEmp.getSal() == null) {
-			requestEmp.setSal(originEmp.getSal());
-		}
-		if(requestEmp.getComm() == null) {
-			requestEmp.setComm(originEmp.getComm());
-		}
-		if(requestEmp.getDept() == null) {
-			requestEmp.setDept(originEmp.getDept());
-		}
-		
-		return requestEmp;
+		return empDTO;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -17,74 +18,63 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.dto.EmpDTO;
+import com.example.dto.PageRequestDTO;
+import com.example.dto.PageResultDTO;
 import com.example.model.Emp;
 import com.example.service.EmpServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
 public class EmpRestController {
 
-	@Autowired
-	EmpServiceImpl empService;
+//	@Autowired
+	private final EmpServiceImpl empService;
 
-	@Autowired
-	DeptRestController deptContorller;
-	
+	@Transactional
 	@GetMapping(value="/emp/emps")
-	public List<Emp> getEmps(){
-		return empService.getEmpAll();
+	public PageResultDTO<EmpDTO, Emp> getEmp(PageRequestDTO pageRequestDTO) {
+		PageResultDTO<EmpDTO, Emp> pageResultDTO = empService.getList(pageRequestDTO);
+		List<EmpDTO> empList = new ArrayList<EmpDTO>();
+		pageResultDTO.getDtoList().forEach(empDto -> empList.add(empDto));
+		return pageResultDTO;
 	}
-
+	
+	@Transactional
 	@GetMapping(value = "/emp/{empno}")
 	public Emp getEmpByEmpno(@PathVariable Long empno) {
-		System.out.println(empno);
 		return empService.getEmpByEmpno(empno);
 	}
 
+	@Transactional
 	@PostMapping(value = "/emp/{empno}", consumes =MediaType.APPLICATION_JSON_VALUE )
-	public void insertDept(@PathVariable Long empno, @RequestBody Emp param) {
-		Emp empCheck = new Emp();
-		empCheck = getEmpByEmpno(param.getEmpno());
-		if(empCheck == null) {
-			LocalDate now = LocalDate.now();  
-			
-			Emp emp = new Emp();
-			emp.setEmpno(param.getEmpno());
-			emp.setEname(param.getEname());
-			emp.setJob(param.getJob());
-			emp.setMgr(param.getMgr());
-			emp.setHiredate(now);
-			emp.setSal(param.getSal());
-			emp.setComm(param.getComm());
-			emp.setDept(param.getDept());
-			
-			System.out.println(emp);
-			
-			empService.insertEmp(emp);
-		}else {
-			System.out.println("사원번호가 존재랍니다.");
-		}
+	public void insertEmp(@RequestBody EmpDTO empDTO) {
+		empService.insertEmp(empDTO);
 	}
 	
+	@Transactional
 	@PutMapping(value = "/emp/{empno}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateDeptByDeptno(@PathVariable Long empno, @RequestBody Emp param) {
-		if(empno == null) {
-			System.out.println("사원번호를 입력해주세요.");
+	public void updateEmpByEmpno(@PathVariable Long empno, @RequestBody EmpDTO empDTO) {
+		if(empno == null ) {
+			System.out.println("부서번호를 입력해주세요.");
 		}else {
-			Emp originEmp = getEmpByEmpno(empno);
-			if(originEmp == null) {
-				System.out.println("사원번호가 존재하지 않습니다.");
-			} else {
-				Emp emp = Emp.empCheck(originEmp, param);
-				empService.updateEmp(emp);
+			Emp checkEmp= getEmpByEmpno(empno);
+			if(checkEmp == null) {
+				System.out.println("부서번호가 존재하지 않습니다.");
+			}else {
+				empDTO.setEmpno(empno);
+				empService.updateEmp(empDTO);
 			}
 		}
 	}
 
 	
-	@DeleteMapping(value="/emp/{empno}")
 	@Transactional
+	@DeleteMapping(value="/emp/{empno}")
 	public void deleteByEmpno(@PathVariable Long empno) {
 		Emp emp = new Emp();
 		emp = getEmpByEmpno(empno);

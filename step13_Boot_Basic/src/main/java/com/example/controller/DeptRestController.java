@@ -48,10 +48,9 @@ public class DeptRestController {
 	}
 	
 	@GetMapping(value="/dept/deptspaging")
-	public PageResultDTO<DeptDTO, Dept> getDiary(PageRequestDTO pageRequestDTO) {
+	public PageResultDTO<DeptDTO, Dept> getDept(PageRequestDTO pageRequestDTO) {
 		PageResultDTO<DeptDTO, Dept> pageResultDTO = deptService.getList(pageRequestDTO);
 		List<DeptDTO> deptList = new ArrayList<DeptDTO>();
-		// ??
 		pageResultDTO.getDtoList().forEach(deptDto -> deptList.add(deptDto));
 		return pageResultDTO;
 	}

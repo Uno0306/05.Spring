@@ -10,8 +10,6 @@ import com.example.model.Emp;
 
 @Repository
 public interface EmpRepository extends JpaRepository<Emp, Long> {
-	public List<Emp> findAll();
-	
 	public Emp findEmpByEmpno(Long empno);
 	
 	@SuppressWarnings("unchecked")
