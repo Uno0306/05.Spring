@@ -1,0 +1,61 @@
+/* controller */
+public boid updateDeptByDeptno(@PathVariable Long deptno, @RequestBody Dept newDept ){
+	Dept oldDept = deptRepo.findDeptByDeptno(deptno);
+	Optional<Dept> oldDept2 = deptRepo.findById(deptno).orElseThrow(exceptionSupplier);
+
+	oldDept.setDname(newDept.getDname() == null? oldDept.getDname(): newDept.getDname()) ;
+	oldDept.setLoc(newDept.getLoc());
+	
+}
+------------------------------------------------------------
+/* deptDTO */
+public Dept(Long deptno){
+	if(deptno != null){
+		this.deptno = deptno;
+	}
+}
+
+/* or deptDTO deptno */
+@Column(nullable = false)
+private Long deptno;
+
+------------------------------------------------------------
+com.example.dto
+
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class DeptDTO{
+	
+	// Entity로 바꾸는 method
+	public Dept dtoToEntity(DeptDTO deptDTO ){
+		Dept deptEntity = Dept.builder()
+					.dname(deptDTO.getDname())
+					.loc(deptDTO.getLoc())
+					.build();
+	
+		return deptEntity
+	}
+}
+
+
+
+com.example.model
+
+@Builder
+@Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Dept{
+	
+	
+}
+
+
+
+-----------------------------------------------------------
+     <---->  DTO   <--->  >---Transaction-Entity----<   Entity는 setter 사용하면 안 된다. <- DB가 바뀜
+View  --> Controller <--> Service <--> Repository      DTO에서 getter, setter 사용해야 한다.

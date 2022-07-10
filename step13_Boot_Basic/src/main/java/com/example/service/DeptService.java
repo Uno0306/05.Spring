@@ -14,7 +14,7 @@ public interface DeptService {
 	
 	public PageResultDTO<DeptDTO, Dept> getList(PageRequestDTO pageRequestDTO);
 	
-	public void insertDept(Dept dept);
+	public void insertDept(DeptDTO deptDTO);
 	
 	public void updateDept(Dept dept);
 	

@@ -35,5 +35,16 @@ public class DeptDTO {
 		return deptEntity;
 	}
 	
-	
+	public static DeptDTO deptCheck(DeptDTO originDept, DeptDTO requestDept) {
+		if(requestDept.getDeptno() == null) {
+			requestDept.setDeptno(originDept.getDeptno());
+		}
+		if(requestDept.getDname() == null) {
+			requestDept.setDname(originDept.getDname());
+		}
+		if(requestDept.getLoc() == null) {
+			requestDept.setLoc(originDept.getLoc());
+		}
+		return requestDept;
+	}
 }

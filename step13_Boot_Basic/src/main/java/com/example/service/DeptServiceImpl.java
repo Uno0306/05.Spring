@@ -24,9 +24,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DeptServiceImpl implements DeptService{
 
-	@Autowired
-	private DeptRepository deptRepositiry;
+//	@Autowired
+	private final DeptRepository deptRepositiry;
 	
+	@Transactional
 	@Override
 	public List<Dept> getDeptAll() {
 		return deptRepositiry.findAll();
@@ -44,22 +45,28 @@ public class DeptServiceImpl implements DeptService{
 		return new PageResultDTO<DeptDTO, Dept>(result, function);
 	};
 	
+	@Transactional
 	@Override
 	public Dept getDeptByDeptno(Long deptno) {
 		return deptRepositiry.findDeptByDeptno(deptno);
 	}
 	
+	@Transactional
 	@Override
-	public void insertDept(Dept dept) {
-		deptRepositiry.save(dept);
+	public void insertDept(DeptDTO deptDTO) {
+		Dept deptEntity = deptDTO.toEntity(deptDTO);
+		
+		deptRepositiry.save(deptEntity);
 	}
 	
+	@Transactional
 	@Override
 	public void updateDept(Dept dept) {
 		Dept deptBulider = Dept.deptBuilder(dept).build();
 		deptRepositiry.saveAndFlush(deptBulider);
 	};
 	
+	@Transactional
 	@Override
 	public void deleteDeptByDeptno(Long deptno) {
 		deptRepositiry.deleteDeptByDeptno(deptno);

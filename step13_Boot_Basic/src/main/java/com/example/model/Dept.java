@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.domain.Persistable;
 
 import com.example.dto.DeptDTO;
 
@@ -14,16 +15,19 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Data
-@DynamicInsert
-@DynamicUpdate
 @Entity(name = "dept")
+@Getter
+//@DynamicInsert
+//@DynamicUpdate
 @AllArgsConstructor()
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor()
+@ToString
 @Builder(builderMethodName = "DeptBuilder")
-public class Dept {
+public class Dept implements Persistable<Long>{
 
 	@Id
 	private Long deptno;
@@ -46,25 +50,21 @@ public class Dept {
 		return deptDTO;
 	}
 
-
-	public static Dept deptCheck(Dept originDept, Dept requestDept) {
-		if(requestDept.getDeptno() == null) {
-			requestDept.setDeptno(originDept.getDeptno());
-		}
-		if(requestDept.getDname() == null) {
-			requestDept.setDname(originDept.getDname());
-		}
-		if(requestDept.getLoc() == null) {
-			requestDept.setLoc(originDept.getLoc());
-		}
-		return requestDept;
-	}
-
 	public static DeptBuilder deptBuilder(Dept dept) {
 		return DeptBuilder()
 				.deptno(dept.getDeptno())
 				.dname(dept.getDname())
 				.loc(dept.getLoc());
+	}
+
+	@Override
+	public Long getId() {
+		return deptno;
+	}
+
+	@Override
+	public boolean isNew() {	// 영속성 존재 확인
+		return deptno == null;
 	}
 
 }

@@ -31,13 +31,16 @@ import com.example.dto.PageResultDTO;
 import com.example.model.Dept;
 import com.example.service.DeptServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 //@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
 public class DeptRestController {
 
-	@Autowired
-	DeptServiceImpl deptService;
+//	@Autowired
+	private final DeptServiceImpl deptService;
 
 	@GetMapping(value="/dept/depts")
 	public List<Dept> getDepts(){
@@ -64,12 +67,13 @@ public class DeptRestController {
 	}
 
 	@PostMapping(value = "/dept/{deptno}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertDept(@PathVariable Long deptno, @RequestBody Dept param) {
+	public void insertDept(@PathVariable Long deptno, @RequestBody DeptDTO param) {
 		Dept deptCheck = new Dept();
 		deptCheck = getDeptByDeptno(deptno);
 		if(deptCheck == null) {
-			Dept dept = new Dept(deptno, param.getDname(), param.getLoc());
-			deptService.insertDept(dept);
+			System.out.println("0------------------------0");
+			DeptDTO deptDTO = new DeptDTO(deptno, param.getDname(), param.getLoc());
+			deptService.insertDept(deptDTO);
 		}else {
 			System.out.println("부서번호가 존재합니다.");
 		}
@@ -77,15 +81,17 @@ public class DeptRestController {
 	}
 	
 	@PutMapping(value = "/dept/{deptno}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateDeptByDeptno(@PathVariable Long deptno, @RequestBody Dept param) {
+	public void updateDeptByDeptno(@PathVariable Long deptno, @RequestBody DeptDTO param) {
 		if(deptno == null ) {
 			System.out.println("부서번호를 입력해주세요.");
 		}else {
-			Dept originDept = getDeptByDeptno(deptno);
-			if(originDept == null) {
+			Dept checkDept = getDeptByDeptno(deptno);
+			if(checkDept == null) {
 				System.out.println("부서번호가 존재하지 않습니다.");
 			}else {
-				Dept dept = Dept.deptCheck(originDept, param);
+				DeptDTO originDept = checkDept.toDTO(checkDept);
+				DeptDTO aldept = DeptDTO.deptCheck(originDept, param);
+				Dept dept = aldept.toEntity(aldept);
 				deptService.updateDept(dept);
 			}
 		}
