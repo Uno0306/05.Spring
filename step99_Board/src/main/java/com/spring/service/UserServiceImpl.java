@@ -26,12 +26,18 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	@Override
 	public PageResultDTO<UserDTO, User> getList(PageRequestDTO pageRequestDTO) {
-		Pageable pageable = pageRequestDTO.getPageable(Sort.by("user_email").descending());
+		Pageable pageable = pageRequestDTO.getPageable(Sort.by("userEmail").descending());
 		Page<User> result = userRepo.findAll(pageable);
 		Function<User, UserDTO> function = (userEntity -> userEntity.toDTO(userEntity));
 
 		return new PageResultDTO<UserDTO, User>(result, function);
 	};
+	
+	@Transactional
+	@Override
+	public User getUserByUserEmail(String userEmail) {
+		return userRepo.findUserByUserEmail(userEmail);
+	}
 	
 	@Transactional
 	@Override
@@ -41,4 +47,16 @@ public class UserServiceImpl implements UserService{
 		userRepo.save(userEntity);
 	}
 	
+	@Transactional
+	@Override
+	public void updateUser(UserDTO userDTO) {
+		User userEntity = userDTO.toEntity(userDTO);
+		userRepo.save(userEntity);
+	}
+	
+	@Transactional
+	@Override
+	public void deleteUserByUserEmail(String userEmail) {
+		userRepo.deleteUserByUserEmail(userEmail);
+	}
 }

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
-
 import com.spring.entity.User;
 
 import lombok.AllArgsConstructor;
@@ -19,9 +18,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserDTO {
 
-	@Id	
+	@Id
 	@Column(name = "user_email")
-	private Long userEmail;
+	private String userEmail;
 
 	@Column(name = "user_name", length = 255)
 	private String userName;

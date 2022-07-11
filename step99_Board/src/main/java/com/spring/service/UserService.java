@@ -9,5 +9,11 @@ public interface UserService {
 
 	public PageResultDTO<UserDTO, User> getList(PageRequestDTO pageRequestDTO);
 
+	public User getUserByUserEmail(String userEmail);
+	
 	public void insertUser(UserDTO userDTO);
+	
+	public void updateUser(UserDTO userDTO);
+	
+	public void deleteUserByUserEmail(String userEmail);
 }

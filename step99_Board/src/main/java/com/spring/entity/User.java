@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -25,15 +23,15 @@ import lombok.ToString;
 @Entity(name = "user")
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Builder
 @EntityListeners(AuditingEntityListener.class)
-public class User implements Persistable<Long> {
+@NoArgsConstructor
+public class User implements Persistable<String>{
 
-	@Id	
+	@Id
 	@Column(name = "user_email")
-	private Long userEmail;
+	private String userEmail;
 
 	@Column(name = "user_name", length = 255)
 	private String userName;
@@ -50,7 +48,7 @@ public class User implements Persistable<Long> {
 	private LocalDate modifiedDate;
 
 	@Override
-	public Long getId() {
+	public String getId() {
 		return userEmail;
 	}
 	
