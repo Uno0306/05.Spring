@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,7 +33,7 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class Comment implements Persistable<Long>{
 	
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "comment_no")
 	private Long commentNO;
 	
@@ -52,6 +54,16 @@ public class Comment implements Persistable<Long>{
 	@ManyToOne
 	@JoinColumn(name="board_no")
 	private Board board;
+	
+	@Override
+	public Long getId() {
+		return commentNO;
+	}
+	
+	@Override	// 영속성이 있는지 판단하는 메소드
+	public boolean isNew() {
+		return registeredDate == null;
+	}
 	
 	public CommentDTO toDTO(Comment commentEntity) {
 		CommentDTO commentDTO = CommentDTO.builder()

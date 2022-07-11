@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -29,7 +31,7 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class User implements Persistable<Long> {
 
-	@Id	
+	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_email")
 	private Long userEmail;
 
@@ -47,6 +49,16 @@ public class User implements Persistable<Long> {
 	@Column(name="modified_date")
 	private LocalDate modifiedDate;
 
+	@Override
+	public Long getId() {
+		return userEmail;
+	}
+	
+	@Override	// 영속성이 있는지 판단하는 메소드
+	public boolean isNew() {
+		return registeredDate == null;
+	}
+	
 	public UserDTO toDTO(User userEntity) {
 		UserDTO userDTO = UserDTO.builder()
 				.userEmail(userEntity.getUserEmail())
