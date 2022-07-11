@@ -51,14 +51,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void updateUser(UserDTO userDTO) {
 		User user = getUserByUserEmail(userDTO.getUserEmail());
-		User userEntity = User.builder()
-							.userEmail(userDTO.getUserEmail())
-							.userName(userDTO.getUserName())
-							.userPassword(userDTO.getUserPassword())
-							.registeredDate(user.getRegisteredDate())
-							.build();
+//		User userEntity = User.builder()
+//							.userEmail(userDTO.getUserEmail())
+//							.userName(userDTO.getUserName())
+//							.userPassword(userDTO.getUserPassword())
+//							.registeredDate(user.getRegisteredDate())
+//							.build();
+		user.updateUserNameAndPassword(userDTO);
 		
-		userRepo.save(userEntity);
+		userRepo.save(user);
 	}
 	
 	@Transactional

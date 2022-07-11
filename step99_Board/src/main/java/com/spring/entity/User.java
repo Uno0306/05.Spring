@@ -57,6 +57,12 @@ public class User implements Persistable<String>{
 		return userEmail == null;
 	}
 	
+	public void updateUserNameAndPassword(UserDTO userDTO) {
+		this.userName = userDTO.getUserName();
+		this.userPassword = userDTO.getUserPassword();
+	}
+	
+	
 	public UserDTO toDTO(User userEntity) {
 		UserDTO userDTO = UserDTO.builder()
 				.userEmail(userEntity.getUserEmail())
@@ -68,5 +74,6 @@ public class User implements Persistable<String>{
 
 		return userDTO;
 	}
+
 
 }
