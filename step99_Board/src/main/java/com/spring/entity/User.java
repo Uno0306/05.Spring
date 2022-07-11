@@ -31,7 +31,7 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class User implements Persistable<Long> {
 
-	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id	
 	@Column(name = "user_email")
 	private Long userEmail;
 
