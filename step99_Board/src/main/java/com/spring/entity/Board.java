@@ -1,6 +1,6 @@
 package com.spring.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,11 +45,11 @@ public class Board implements Persistable<Long> {
 	
 	@CreatedDate
 	@Column(name="registered_date")
-	private LocalDate registeredDate;
+	private LocalDateTime registeredDate;
 
 	@LastModifiedDate
 	@Column(name="modified_date")
-	private LocalDate modifiedDate;
+	private LocalDateTime modifiedDate;
 	
 	@ManyToOne
 	@JoinColumn(name="user_email")
@@ -62,7 +62,7 @@ public class Board implements Persistable<Long> {
 	
 	@Override	// 영속성이 있는지 판단하는 메소드
 	public boolean isNew() {
-		return registeredDate == null;
+		return boardNo == null;
 	}
 	
 	public BoardDTO toDTO(Board boardEntity) {

@@ -1,6 +1,6 @@
 package com.spring.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,11 +45,11 @@ public class Comment implements Persistable<Long>{
 	
 	@CreatedDate
 	@Column(name="registered_date")
-	private LocalDate registeredDate;
+	private LocalDateTime registeredDate;
 
 	@LastModifiedDate
 	@Column(name="modified_date")
-	private LocalDate modifiedDate;
+	private LocalDateTime modifiedDate;
 	
 	@ManyToOne
 	@JoinColumn(name="board_no")

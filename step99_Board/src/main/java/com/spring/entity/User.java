@@ -1,6 +1,6 @@
 package com.spring.entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,11 +41,11 @@ public class User implements Persistable<String>{
 
 	@CreatedDate
 	@Column(name="registered_date")
-	private LocalDate registeredDate;
+	private LocalDateTime registeredDate;
 
 	@LastModifiedDate
 	@Column(name="modified_date")
-	private LocalDate modifiedDate;
+	private LocalDateTime modifiedDate;
 
 	@Override
 	public String getId() {
@@ -54,7 +54,7 @@ public class User implements Persistable<String>{
 	
 	@Override	// 영속성이 있는지 판단하는 메소드
 	public boolean isNew() {
-		return registeredDate == null;
+		return userEmail == null;
 	}
 	
 	public UserDTO toDTO(User userEntity) {

@@ -1,6 +1,6 @@
 package com.spring.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -36,11 +36,11 @@ public class BoardDTO {
 	
 	@CreatedDate
 	@Column(name="registered_date")
-	private LocalDate registeredDate;
+	private LocalDateTime registeredDate;
 
 	@LastModifiedDate
 	@Column(name="modified_date")
-	private LocalDate modifiedDate;
+	private LocalDateTime modifiedDate;
 	
 	@ManyToOne
 	@JoinColumn(name="user_email")

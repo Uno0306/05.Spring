@@ -1,18 +1,14 @@
 package com.spring.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.spring.entity.Board;
 import com.spring.entity.Comment;
@@ -20,9 +16,7 @@ import com.spring.entity.Comment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -42,11 +36,11 @@ public class CommentDTO {
 	
 	@CreatedDate
 	@Column(name="registered_date")
-	private LocalDate registeredDate;
+	private LocalDateTime registeredDate;
 
 	@LastModifiedDate
 	@Column(name="modified_date")
-	private LocalDate modifiedDate;
+	private LocalDateTime modifiedDate;
 	
 	@ManyToOne
 	@JoinColumn(name="board_no")
