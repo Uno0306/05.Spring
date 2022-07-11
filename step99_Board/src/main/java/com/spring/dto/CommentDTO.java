@@ -26,7 +26,7 @@ public class CommentDTO {
 	
 	@Id
 	@Column(name = "comment_no")
-	private Long commentNO;
+	private Long commentNo;
 	
 	@Column(length = 255)
 	private String commenter;
@@ -34,11 +34,9 @@ public class CommentDTO {
 	@Column(name = "comment_content", length = 255)
 	private String commentContent;
 	
-	@CreatedDate
-	@Column(name="registered_date")
+	@Column(name="registerd_date")
 	private LocalDateTime registeredDate;
 
-	@LastModifiedDate
 	@Column(name="modified_date")
 	private LocalDateTime modifiedDate;
 	
@@ -48,7 +46,7 @@ public class CommentDTO {
 	
 	public Comment toEntity(CommentDTO commentDTO) {
 		Comment commentEntity = Comment.builder()
-					.commentNO(commentDTO.getCommentNO())
+					.commentNo(commentDTO.getCommentNo())
 					.commenter(commentDTO.getCommenter())
 					.commentContent(commentDTO.getCommentContent())
 					.board(commentDTO.getBoard())

@@ -33,9 +33,9 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class Comment implements Persistable<Long>{
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id 
 	@Column(name = "comment_no")
-	private Long commentNO;
+	private Long commentNo;
 	
 	@Column(length = 255)
 	private String commenter;
@@ -44,7 +44,7 @@ public class Comment implements Persistable<Long>{
 	private String commentContent;
 	
 	@CreatedDate
-	@Column(name="registered_date")
+	@Column(name="registerd_date")
 	private LocalDateTime registeredDate;
 
 	@LastModifiedDate
@@ -57,17 +57,22 @@ public class Comment implements Persistable<Long>{
 	
 	@Override
 	public Long getId() {
-		return commentNO;
+		return commentNo;
 	}
 	
 	@Override	// 영속성이 있는지 판단하는 메소드
 	public boolean isNew() {
-		return registeredDate == null;
+		return commentNo == null;
 	}
+	
+	public void updateCommentContent(CommentDTO commentDTO) {
+		this.commentContent = commentDTO.getCommentContent();
+	}
+	
 	
 	public CommentDTO toDTO(Comment commentEntity) {
 		CommentDTO commentDTO = CommentDTO.builder()
-					.commentNO(commentEntity.getCommentNO())
+					.commentNo(commentEntity.getCommentNo())
 					.commenter(commentEntity.getCommenter())
 					.commentContent(commentEntity.getCommentContent())
 					.registeredDate(commentEntity.getRegisteredDate())

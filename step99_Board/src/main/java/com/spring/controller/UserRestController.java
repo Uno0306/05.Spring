@@ -1,7 +1,5 @@
 package com.spring.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 import org.springframework.http.MediaType;
@@ -34,8 +32,8 @@ public class UserRestController {
 	@GetMapping(value = "/user/users")
 	public PageResultDTO<UserDTO, User> getUsers(PageRequestDTO pageRequestDTO){
 		PageResultDTO<UserDTO, User> pageResultDTO = userService.getList(pageRequestDTO);
-		List<UserDTO> userList = new ArrayList<UserDTO>();
-		pageResultDTO.getDtoList().forEach(UserDTO -> userList.add(UserDTO));
+//		List<UserDTO> userList = new ArrayList<UserDTO>();
+//		pageResultDTO.getDtoList().forEach(UserDTO -> userList.add(UserDTO));
 		
 		return pageResultDTO;
 	}

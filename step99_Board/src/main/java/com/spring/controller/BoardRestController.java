@@ -31,8 +31,8 @@ public class BoardRestController {
 	@GetMapping(value = "/board/boardlist")
 	public PageResultDTO<BoardDTO, Board> getBoardList(PageRequestDTO pageRequestDTO){
 		PageResultDTO<BoardDTO, Board> pageResultDTO = boardService.getList(pageRequestDTO);
-		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
-		pageResultDTO.getDtoList().forEach(boardDTO -> boardList.add(boardDTO));
+//		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
+//		pageResultDTO.getDtoList().forEach(boardDTO -> boardList.add(boardDTO));
 		
 		return pageResultDTO;
 	}
