@@ -7,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import com.spring.entity.Board;
 import com.spring.entity.User;
 
@@ -34,11 +31,9 @@ public class BoardDTO {
 	@Column(name = "board_content")
 	private String boardContent;
 	
-	@CreatedDate
 	@Column(name="registered_date")
 	private LocalDateTime registeredDate;
 
-	@LastModifiedDate
 	@Column(name="modified_date")
 	private LocalDateTime modifiedDate;
 	

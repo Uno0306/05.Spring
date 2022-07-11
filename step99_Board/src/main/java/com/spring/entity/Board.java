@@ -65,6 +65,11 @@ public class Board implements Persistable<Long> {
 		return boardNo == null;
 	}
 	
+	public void updateBoardTitleAndContent(BoardDTO boardDTO) {
+		this.boardTitle = boardDTO.getBoardTitle();
+		this.boardContent = boardDTO.getBoardContent();
+	}
+	
 	public BoardDTO toDTO(Board boardEntity) {
 		BoardDTO boardDTO = BoardDTO.builder()
 				.boardNo(boardEntity.getBoardNo())

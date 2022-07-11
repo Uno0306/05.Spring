@@ -8,5 +8,9 @@ import com.spring.entity.User;
 
 @Repository
 public interface BoardRepository  extends JpaRepository<Board, Long>  {
-
+	
+	public Board findBoardByBoardNo(Long boardNo);
+	
+	public void deleteBoardByBoardNo(Long boardNo);
+	
 }
