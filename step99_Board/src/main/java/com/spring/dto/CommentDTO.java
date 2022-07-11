@@ -1,4 +1,4 @@
-package com.spring.entity;
+package com.spring.dto;
 
 import java.time.LocalDate;
 
@@ -14,32 +14,31 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.spring.dto.BoardDTO;
+import com.spring.entity.Board;
+import com.spring.entity.Comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity(name = "board")
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
-@EntityListeners(AuditingEntityListener.class)
-public class Board implements Persistable<Long> {
-
+public class CommentDTO {
+	
 	@Id
-	@Column(name = "board_no")
-	private Long boardNo;
+	@Column(name = "comment_no")
+	private Long commentNO;
 	
-	@Column(name = "board_title", length = 255)
-	private String boardTitle;
+	@Column(length = 255)
+	private String commenter;
 	
-	@Column(name = "board_content", length = 255)
-	private String boardContent;
+	@Column(name = "comment_content", length = 255)
+	private String commentContent;
 	
 	@CreatedDate
 	@Column(name="registered_date")
@@ -50,20 +49,18 @@ public class Board implements Persistable<Long> {
 	private LocalDate modifiedDate;
 	
 	@ManyToOne
-	@JoinColumn(name="user_email")
-	private User user;
+	@JoinColumn(name="board_no")
+	private Board board;
 	
-	public BoardDTO toDTO(Board boardEntity) {
-		BoardDTO boardDTO = BoardDTO.builder()
-				.boardNo(boardEntity.getBoardNo())
-				.boardTitle(boardEntity.getBoardTitle())
-				.boardContent(boardEntity.getBoardContent())
-				.registeredDate(boardEntity.getRegisteredDate())
-				.modifiedDate(boardEntity.getModifiedDate())
-				.user(boardEntity.getUser())
-				.build();
-
-		return boardDTO;
+	public Comment toEntity(CommentDTO commentDTO) {
+		Comment commentEntity = Comment.builder()
+					.commentNO(commentDTO.getCommentNO())
+					.commenter(commentDTO.getCommenter())
+					.commentContent(commentDTO.getCommentContent())
+					.board(commentDTO.getBoard())
+					.build();
+		
+		return commentEntity;
 	}
 	
 }
