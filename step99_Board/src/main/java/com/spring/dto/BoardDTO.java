@@ -1,13 +1,18 @@
 package com.spring.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.entity.Board;
+import com.spring.entity.Comment;
 import com.spring.entity.User;
 
 import lombok.AllArgsConstructor;
@@ -40,6 +45,9 @@ public class BoardDTO {
 	@ManyToOne
 	@JoinColumn(name="user_email")
 	private User user;
+	
+	private List<Comment> comments = new ArrayList<Comment>();
+	
 	
 	public Board toEntity(BoardDTO boardDTO) {
 		Board boardEntity = Board.builder()

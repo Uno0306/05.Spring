@@ -47,7 +47,7 @@ public class BoardRestController {
 	}
 	
 	@PutMapping(value="/board", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateBoardByBoardNo(@RequestBody BoardDTO boardDTO) {
+	public void updateBoard(@RequestBody BoardDTO boardDTO) {
 		boardService.updateBoard(boardDTO);
 	}
 	

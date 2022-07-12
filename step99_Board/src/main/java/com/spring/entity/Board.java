@@ -1,6 +1,8 @@
 package com.spring.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.dto.BoardDTO;
 
 import lombok.AllArgsConstructor;
@@ -55,6 +59,10 @@ public class Board implements Persistable<Long> {
 	@JoinColumn(name="user_email")
 	private User user;
 	
+	@OneToMany(mappedBy = "board")
+	@JsonIgnore
+	private List<Comment> comments = new ArrayList<Comment>();
+	
 	@Override
 	public Long getId() {
 		return boardNo;
@@ -78,6 +86,7 @@ public class Board implements Persistable<Long> {
 				.registeredDate(boardEntity.getRegisteredDate())
 				.modifiedDate(boardEntity.getModifiedDate())
 				.user(boardEntity.getUser())
+				.comments(boardEntity.getComments())
 				.build();
 
 		return boardDTO;
