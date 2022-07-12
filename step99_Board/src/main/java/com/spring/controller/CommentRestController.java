@@ -46,7 +46,7 @@ public class CommentRestController {
 	
 	
 	@PostMapping(value = "/comment", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertBoard(@RequestBody CommentDTO commentDTO) {
+	public void insertComment(@RequestBody CommentDTO commentDTO) {
 		commentService.insertComment(commentDTO);
 	}
 	

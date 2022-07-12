@@ -33,7 +33,7 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 public class Comment implements Persistable<Long>{
 	
-	@Id 
+	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "comment_no")
 	private Long commentNo;
 	
