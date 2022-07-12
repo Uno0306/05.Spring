@@ -1,9 +1,8 @@
 package com.spring.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
 public class BoardRestController {
 	
 	private final BoardServiceImpl boardService;
@@ -31,9 +31,7 @@ public class BoardRestController {
 	@GetMapping(value = "/board/boardlist")
 	public PageResultDTO<BoardDTO, Board> getBoardList(PageRequestDTO pageRequestDTO){
 		PageResultDTO<BoardDTO, Board> pageResultDTO = boardService.getList(pageRequestDTO);
-//		List<BoardDTO> boardList = new ArrayList<BoardDTO>();
-//		pageResultDTO.getDtoList().forEach(boardDTO -> boardList.add(boardDTO));
-		
+
 		return pageResultDTO;
 	}
 	
