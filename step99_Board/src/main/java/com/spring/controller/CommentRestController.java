@@ -37,7 +37,7 @@ public class CommentRestController {
 		return commentService.getCommentsByBoardNo(boardNo);
 	}
 	
-	@GetMapping(value = "/comment/{commentNO}")
+	@GetMapping(value = "/comment/{commentNo}")
 	public Comment getCommentByCommentNo(@PathVariable Long commentNo) {
 		return commentService.getCommentByCommentNo(commentNo);
 	}
@@ -53,7 +53,7 @@ public class CommentRestController {
 		commentService.updateComment(commentDTO);
 	}
 	
-	@DeleteMapping(value = "/comment/{commentNO}")
+	@DeleteMapping(value = "/comment/{commentNo}")
 	public void deleteCommentByCommentNo(@PathVariable Long commentNo) {
 		Comment comment = new Comment();
 		comment = getCommentByCommentNo(commentNo);

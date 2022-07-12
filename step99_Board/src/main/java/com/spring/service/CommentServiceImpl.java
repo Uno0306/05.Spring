@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.spring.dto.CommentDTO;
+import com.spring.entity.Board;
 import com.spring.entity.Comment;
+import com.spring.repository.BoardRepository;
 import com.spring.repository.CommentRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,8 @@ public class CommentServiceImpl implements CommentService{
 
 	private final CommentRepository commentRepo;
 	
+	private final BoardRepository boardRepo;
+	
 	@Transactional
 	@Override
 	public List<Comment> getCommentAll(){
@@ -28,7 +32,9 @@ public class CommentServiceImpl implements CommentService{
 	@Transactional
 	@Override
 	public List<Comment> getCommentsByBoardNo(Long boardNo){
-		return commentRepo.findCommentByBoard(boardNo);
+		Board board = boardRepo.findBoardByBoardNo(boardNo);
+		
+		return commentRepo.findCommentByBoard(board);
 	};
 	
 	
