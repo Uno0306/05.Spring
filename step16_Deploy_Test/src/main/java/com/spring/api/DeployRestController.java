@@ -12,7 +12,7 @@ public class DeployRestController {
 	
 	@GetMapping("/deploy")
 	public String deploytTest() {
-		return "배포 테스트 RestController 입니다.";
+		return "배포 테스트 RestController 입니다!";
 	}
 
 }
