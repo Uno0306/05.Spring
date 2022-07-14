@@ -57,4 +57,13 @@ public class Diary implements Persistable<Long> {
 		return diaryDTO;
 	}
 	
+	
+//	public void updateEntity(DiaryDTO diaryDTO) {
+//		this.title = diaryDTO.getTitle();
+//		this.content = diaryDTO.getContent();
+//	}
+	
+	public void updateTitle(String title) {
+		this.title = title;
+	}
 }

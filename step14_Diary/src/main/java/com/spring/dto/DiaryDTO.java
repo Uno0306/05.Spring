@@ -2,6 +2,7 @@ package com.spring.dto;
 
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import javax.persistence.Id;
 
@@ -37,5 +38,8 @@ public class DiaryDTO {
 		return diaryEntity;
 	}
 	
+	public Optional<String> updateTitle(String title){
+		return Optional.ofNullable(title);
+	}
 	
 }

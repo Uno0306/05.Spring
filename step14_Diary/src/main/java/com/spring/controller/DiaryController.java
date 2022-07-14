@@ -32,6 +32,12 @@ public class DiaryController {
 
 	@PostMapping(value = "/diary", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertDiary(@RequestBody DiaryDTO diaryDTO) {
+//		diaryEntity.updateTitle(diaryDTO.getTitle());
+		Diary diaryEntity= diaryRepo.findById(diaryDTO.getNo()).orElseThrow(() -> new IllegalArgumentException());
+		
+		diaryDTO.updateTitle(diaryDTO.getTitle()).ifPresent(diaryEntity::updateTitle);;
+		
+		
 		diaryServiceImpl.insertDiary(diaryDTO);
 	}
 
@@ -126,18 +132,22 @@ public class DiaryController {
 	}
 
 	@GetMapping("/diary")
-	public void getDiary(PageRequestDTO pageRequestDTO) {
-		System.out.println("START======pageRequestDTO===========");
-		System.out.println(pageRequestDTO);
-		PageResultDTO<DiaryDTO, Diary> pageResultDTO = diaryServiceImpl.getList(pageRequestDTO);
-
-		System.out.println("=====PageRequestDTO 객체값 출력(page번 페이지에 있는 내용만)=====");
-		// ??
-		pageResultDTO.getDtoList().forEach(diaryDto -> System.out.println(diaryDto));
+	public void getDiary(PageRequestDTO pageRequestDTO) throws Exception {
+//		PageResultDTO<DiaryDTO, Diary> pageResultDTO = diaryServiceImpl.getList(pageRequestDTO);
+//
+//		pageResultDTO.getDtoList().forEach(diaryDto -> System.out.println(diaryDto));
 		
-		System.out.println("END=====PageRequestDTO=====");
-		System.out.println(pageResultDTO.getPageList());
-		System.out.println("END========pageRequestDTO===========");
+		throw new Exception("예외 테스트");
 	}
 
+//	@ExceptionHandler
+//	public ResponseEntity<String> handleExcpetion(Exception e){
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//	}
+//	
+//	@ExceptionHandler(NoSuchElementException.class)
+//	public ResponseEntity<String> handleExcpetion2(NoSuchElementException e){
+//		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//	}
+	
 }

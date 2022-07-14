@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaAuditing
 @EntityScan(basePackages = {"com.spring.entity"})
 @EnableJpaRepositories(basePackages = {"com.spring.repository"})
-@ComponentScan(basePackages = {"com.spring.service", "com.spring.controller", "com.spring.dto"})
+@ComponentScan(basePackages = {"com.spring.exception", "com.spring.service", "com.spring.controller", "com.spring.dto"})
 public class Step99BoardApplication {
 
 	public static void main(String[] args) {
